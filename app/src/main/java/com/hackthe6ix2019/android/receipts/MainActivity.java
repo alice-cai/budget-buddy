@@ -94,23 +94,27 @@ public class MainActivity extends AppCompatActivity implements BudgetFragment.On
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
+
                 //Toast.makeText(this, byteArray + "", Toast.LENGTH_LONG).show();
-                Log.d("main activity","DATA EXTRAS: " + data.getExtras());
+                //Log.d("main activity","DATA EXTRAS: " + data.getExtras());
+
+                ByteBuffer sourceImageBytes = ByteBuffer.wrap(byteArray);
+                new AsyncTextractRequest().execute(sourceImageBytes);
 
                 // aws stuff
                 //AmazonRekognition rekognitionClient = new AmazonRekognitionClient(new BasicAWSCredentials("", ""));
-
-                // TODO: remove later
-                BasicAWSCredentials credentials = new BasicAWSCredentials("AKIASMTWCNOQRPPVZXFP", "zbRVfIYS2Y+6a92/jUtn4+B8fUUi6cgjwuZ5F/Wu");
-
-                AmazonTextractClient amazonTextractClient = new AmazonTextractClient(credentials);
-                ByteBuffer sourceImageBytes = ByteBuffer.wrap(byteArray);
-                Document source = new Document().withBytes(sourceImageBytes);
-                DetectDocumentTextRequest documentTextRequest = new DetectDocumentTextRequest().withDocument(source);
-                DetectDocumentTextResult documentTextResult = amazonTextractClient.detectDocumentText(documentTextRequest);
-                System.out.println(documentTextResult);
-                Log.d("main activity","RESULT: " + documentTextResult);
-                Toast.makeText(this, documentTextResult + "", Toast.LENGTH_LONG).show();
+//
+//                // TODO: remove later
+//                BasicAWSCredentials credentials = new BasicAWSCredentials("AKIASMTWCNOQRPPVZXFP", "zbRVfIYS2Y+6a92/jUtn4+B8fUUi6cgjwuZ5F/Wu");
+//
+//                AmazonTextractClient amazonTextractClient = new AmazonTextractClient(credentials);
+//                ByteBuffer sourceImageBytes = ByteBuffer.wrap(byteArray);
+//                Document source = new Document().withBytes(sourceImageBytes);
+//                DetectDocumentTextRequest documentTextRequest = new DetectDocumentTextRequest().withDocument(source);
+//                DetectDocumentTextResult documentTextResult = amazonTextractClient.detectDocumentText(documentTextRequest);
+//                System.out.println(documentTextResult);
+//                Log.d("main activity","RESULT: " + documentTextResult);
+//                Toast.makeText(this, documentTextResult + "", Toast.LENGTH_LONG).show();
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             }
