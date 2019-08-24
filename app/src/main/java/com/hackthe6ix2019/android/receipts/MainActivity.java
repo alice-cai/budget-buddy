@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -41,6 +42,12 @@ public class MainActivity extends AppCompatActivity implements BudgetFragment.On
         // defaults to the budget page
         Fragment defaultFragment = new BudgetFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, defaultFragment).commit();
+
+        if (android.os.Build.VERSION.SDK_INT > 9)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -64,7 +71,8 @@ public class MainActivity extends AppCompatActivity implements BudgetFragment.On
                     // TODO: change this to: fragment = new HomeFragment();
                     break;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    //mTextMessage.setText(R.string.title_notifications);
+                    fragment = new BudgetFragment();
                     // TODO: change this to: fragment = new HomeFragment();
                     break;
                 default:
@@ -84,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements BudgetFragment.On
                 Bitmap bp = (Bitmap) data.getExtras().get("data");
                 // convert to byte array
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                bp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
                 //Toast.makeText(this, byteArray + "", Toast.LENGTH_LONG).show();
                 Log.d("main activity","DATA EXTRAS: " + data.getExtras());

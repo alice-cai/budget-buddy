@@ -3,6 +3,7 @@
     package="com.hackthe6ix2019.android.receipts" >
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-feature
         android:name="android.hardware.camera.any"
         android:required="true" />
