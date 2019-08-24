@@ -1,0 +1,20 @@
+# this is an auto generated file. This will be overwritten
+query GetMoney($id: ID!) {
+  getMoney(id: $id) {
+    id
+    cost
+  }
+}
+query ListMoneys(
+  $filter: ModelMoneyFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listMoneys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      cost
+    }
+    nextToken
+  }
+}

@@ -1,0 +1,11 @@
+{
+	"api": {
+		"hackthe6ix": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"securityType": "API_KEY"
+			}
+		}
+	}
+}

@@ -1,0 +1,4 @@
+type Money @model {
+  id: ID!
+  cost: Int!
+}
