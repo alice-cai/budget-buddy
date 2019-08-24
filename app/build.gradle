@@ -33,7 +33,7 @@ dependencies {
 //Base SDK
     implementation 'com.amazonaws:aws-android-sdk-core:2.15.+'
     // Rekognition
-    implementation 'com.amazonaws:aws-android-sdk-rekognition:2.10.0'
+    //implementation 'com.amazonaws:aws-android-sdk-rekognition:2.10.0'
     // Textract
     implementation 'com.amazonaws:aws-android-sdk-textract:2.15.1'
 }
