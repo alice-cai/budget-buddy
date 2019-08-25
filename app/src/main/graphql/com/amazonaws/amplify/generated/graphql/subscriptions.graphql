@@ -1,0 +1,22 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateMoney {
+  onCreateMoney {
+    id
+    cost
+    category
+  }
+}
+subscription OnUpdateMoney {
+  onUpdateMoney {
+    id
+    cost
+    category
+  }
+}
+subscription OnDeleteMoney {
+  onDeleteMoney {
+    id
+    cost
+    category
+  }
+}

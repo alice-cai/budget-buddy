@@ -1,0 +1,14 @@
+{
+    "hack": {
+        "awscloudformation": {
+            "AuthRoleName": "hack-the-6ix-hack-20190824193736-authRole",
+            "UnauthRoleArn": "arn:aws:iam::164530121633:role/hack-the-6ix-hack-20190824193736-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::164530121633:role/hack-the-6ix-hack-20190824193736-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "hack-the-6ix-hack-20190824193736-deployment",
+            "UnauthRoleName": "hack-the-6ix-hack-20190824193736-unauthRole",
+            "StackName": "hack-the-6ix-hack-20190824193736",
+            "StackId": "arn:aws:cloudformation:us-east-2:164530121633:stack/hack-the-6ix-hack-20190824193736/286d4780-c6c8-11e9-b47a-02649197f7a0"
+        }
+    }
+}

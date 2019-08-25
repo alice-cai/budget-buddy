@@ -1,0 +1,5 @@
+type Money @model {
+  id: ID!
+  cost: Float!
+  category: String!
+}
