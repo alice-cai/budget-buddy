@@ -74,21 +74,22 @@ public class BudgetFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_budget, container, false);
         PieChartView pieChartView = view.findViewById(R.id.chart);
 
-
+        // get updated values from api here
 
         List<SliceValue> pieData = new ArrayList<>();
-        pieData.add(new SliceValue(15, Color.parseColor("#82dae0")).setLabel("Food"));
-        pieData.add(new SliceValue(25, Color.parseColor("#fff0a5")).setLabel("Clothing"));
-        pieData.add(new SliceValue(10, Color.parseColor("#b0e5ca")).setLabel("Personal"));
-        pieData.add(new SliceValue(30, Color.parseColor("#e5b0b1")).setLabel("Health"));
-        pieData.add(new SliceValue(20, Color.parseColor("#b7adc7")).setLabel("Transit"));
+        pieData.add(new SliceValue(15, Color.parseColor("#82dae0")).setLabel("Food: $15"));
+        pieData.add(new SliceValue(25, Color.parseColor("#fff0a5")).setLabel("Clothing: $25"));
+        pieData.add(new SliceValue(5, Color.parseColor("#b0e5ca")).setLabel("Bills: $10"));
+        pieData.add(new SliceValue(30, Color.parseColor("#e5b0b1")).setLabel("Health: $30"));
+        pieData.add(new SliceValue(20, Color.parseColor("#b7adc7")).setLabel("Transit: $20"));
 
         PieChartData pieChartData = new PieChartData(pieData);
         pieChartData.setHasLabels(true).setValueLabelTextSize(12);
         pieChartData.setHasCenterCircle(true)
-                .setCenterText1("this month's expenses")
-                .setCenterText1FontSize(20)
-                .setCenterText1Color(Color.parseColor("#787878"));
+                .setCenterCircleScale((float)(0.3));
+//                .setCenterText1("spending")
+//                .setCenterText1FontSize(20)
+//                .setCenterText1Color(Color.parseColor("#787878"));
         pieChartView.setPieChartData(pieChartData);
 
         // Inflate the layout for this fragment

@@ -58,23 +58,23 @@ public class MainActivity extends AppCompatActivity implements BudgetFragment.On
             Fragment fragment = null;
 
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.navigation_summary:
                     //mTextMessage.setText(R.string.title_home);
                     // TODO: change this to: fragment = new HomeFragment();
                     fragment = new BudgetFragment();
                     break;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_camera:
                     //mTextMessage.setText(R.string.title_dashboard);
                     Intent cInt = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(cInt,Image_Capture_Code);
                     fragment = new BudgetFragment();
                     // TODO: change this to: fragment = new HomeFragment();
                     break;
-                case R.id.navigation_notifications:
-                    //mTextMessage.setText(R.string.title_notifications);
-                    fragment = new BudgetFragment();
-                    // TODO: change this to: fragment = new HomeFragment();
-                    break;
+//                case R.id.navigation_history:
+//                    //mTextMessage.setText(R.string.title_notifications);
+//                    fragment = new BudgetFragment();
+//                    // TODO: change this to: fragment = new HomeFragment();
+//                    break;
                 default:
                     return false;
             }
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements BudgetFragment.On
                 //Log.d("main activity","DATA EXTRAS: " + data.getExtras());
 
                 ByteBuffer sourceImageBytes = ByteBuffer.wrap(byteArray);
-                new AsyncTextractRequest().execute(sourceImageBytes);
+                new AsyncTextractRequest(this).execute(sourceImageBytes);
 
                 // aws stuff
                 //AmazonRekognition rekognitionClient = new AmazonRekognitionClient(new BasicAWSCredentials("", ""));

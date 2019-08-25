@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="30dp" >
+
+    <TextView
+        android:id="@+id/costMessage"
+        android:layout_width="fill_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/category1"
+        android:layout_width="fill_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:paddingVertical="25dp"
+        android:textSize="18sp"
+        android:text="@string/category_1" />
+
+    <Button
+        android:id="@+id/category2"
+        android:layout_width="fill_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:paddingVertical="25dp"
+        android:textSize="18sp"
+        android:text="@string/category_2" />
+
+    <Button
+        android:id="@+id/category3"
+        android:layout_width="fill_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:paddingVertical="25dp"
+        android:textSize="18sp"
+        android:text="@string/category_3" />
+
+    <Button
+        android:id="@+id/category4"
+        android:layout_width="fill_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:paddingVertical="25dp"
+        android:textSize="18sp"
+        android:text="@string/category_4" />
+
+    <Button
+        android:id="@+id/category5"
+        android:layout_width="fill_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:paddingVertical="25dp"
+        android:textSize="18sp"
+        android:text="@string/category_5" />
+
+
+</LinearLayout>
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--xmlns:tools="http://schemas.android.com/tools"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--tools:context=".SelectCategoryActivity">-->
+
+<!--</android.support.constraint.ConstraintLayout>-->
