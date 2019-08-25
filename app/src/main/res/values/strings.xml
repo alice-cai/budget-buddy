@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Receipts</string>
+    <string name="app_name">Budget Buddy</string>
 
     <string name="title_summary">Spending</string>
     <string name="title_camera">Take Photo</string>

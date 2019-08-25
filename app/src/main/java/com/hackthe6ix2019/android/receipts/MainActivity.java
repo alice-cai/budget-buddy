@@ -1,5 +1,6 @@
 package com.hackthe6ix2019.android.receipts;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -29,33 +30,36 @@ import com.apollographql.apollo.exception.ApolloException;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 
 import javax.annotation.Nonnull;
 
 import type.CreateMoneyInput;
+import type.UpdateMoneyInput;
 
 public class MainActivity extends AppCompatActivity implements BudgetFragment.OnFragmentInteractionListener {
 
     private TextView mTextMessage;
     private static final int Image_Capture_Code = 1;
-    private AWSAppSyncClient mAWSAppSyncClient;
+    //private AWSAppSyncClient mAWSAppSyncClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mAWSAppSyncClient = AWSAppSyncClient.builder()
-                .context(getApplicationContext())
-                .awsConfiguration(new AWSConfiguration(getApplicationContext()))
-                .build();
+//        mAWSAppSyncClient = AWSAppSyncClient.builder()
+//                .context(getApplicationContext())
+//                .awsConfiguration(new AWSConfiguration(getApplicationContext()))
+//                .build();
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         // defaults to the budget page
-        Fragment defaultFragment = new BudgetFragment();
+        Fragment defaultFragment = new BudgetFragment(this.getApplicationContext());
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, defaultFragment).commit();
 
         if (android.os.Build.VERSION.SDK_INT > 9)
@@ -64,74 +68,6 @@ public class MainActivity extends AppCompatActivity implements BudgetFragment.On
             StrictMode.setThreadPolicy(policy);
         }
     }
-
-    // Add to database
-    public void runMutation(){
-        CreateMoneyInput createMoneyInput = CreateMoneyInput.builder().
-                cost(1.00).
-                category("Entertainment").
-                build();
-
-        mAWSAppSyncClient.mutate(CreateMoneyMutation.builder().input(createMoneyInput).build())
-                .enqueue(mutationCallback);
-    }
-
-    private GraphQLCall.Callback<CreateMoneyMutation.Data> mutationCallback = new GraphQLCall.Callback<CreateMoneyMutation.Data>() {
-        @Override
-        public void onResponse(@Nonnull Response<CreateMoneyMutation.Data> response) {
-            Log.i("Results", "Added Money");
-        }
-
-        @Override
-        public void onFailure(@Nonnull ApolloException e) {
-            Log.e("Error", e.toString());
-        }
-    };
-
-    // Query Data
-    public void runQuery(){
-        mAWSAppSyncClient.query(ListMoneysQuery.builder().build())
-                .responseFetcher(AppSyncResponseFetchers.CACHE_AND_NETWORK)
-                .enqueue(moneysCallback);
-    }
-
-    private GraphQLCall.Callback<ListMoneysQuery.Data> moneysCallback = new GraphQLCall.Callback<ListMoneysQuery.Data>() {
-        @Override
-        public void onResponse(@Nonnull Response<ListMoneysQuery.Data> response) {
-            Log.i("Results", response.data().listMoneys().items().toString());
-        }
-
-        @Override
-        public void onFailure(@Nonnull ApolloException e) {
-            Log.e("ERROR", e.toString());
-        }
-    };
-
-    // Subscription
-    private AppSyncSubscriptionCall subscriptionWatcher;
-
-    private void subscribe(){
-        OnCreateMoneySubscription subscription = OnCreateMoneySubscription.builder().build();
-        subscriptionWatcher = mAWSAppSyncClient.subscribe(subscription);
-        subscriptionWatcher.execute(subCallback);
-    }
-
-    private AppSyncSubscriptionCall.Callback subCallback = new AppSyncSubscriptionCall.Callback() {
-        @Override
-        public void onResponse(@Nonnull Response response) {
-            Log.i("Response", response.data().toString());
-        }
-
-        @Override
-        public void onFailure(@Nonnull ApolloException e) {
-            Log.e("Error", e.toString());
-        }
-
-        @Override
-        public void onCompleted() {
-            Log.i("Completed", "Subscription completed");
-        }
-    };
 
     // Bottom Navigation
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

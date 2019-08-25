@@ -4,12 +4,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.amazonaws.amplify.generated.graphql.CreateMoneyMutation;
+import com.amazonaws.mobile.config.AWSConfiguration;
+import com.amazonaws.mobileconnectors.appsync.AWSAppSyncClient;
+import com.apollographql.apollo.GraphQLCall;
+import com.apollographql.apollo.api.Response;
+import com.apollographql.apollo.exception.ApolloException;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.annotation.Nonnull;
+
+import type.CreateMoneyInput;
 
 public class SelectCategoryActivity extends AppCompatActivity {
 
@@ -54,13 +66,39 @@ public class SelectCategoryActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                double cost = costDollars + (costCents / 100);
-                String key = getString(stringId);
-                // api call (read, update, write)
-                // navigate back to main
-
+                float cost = (float) (costDollars + (costCents / 100));
+                String key = " " + getString(stringId);
+                runMutation(v.getContext(), cost, key);
                 startActivity(new Intent(v.getContext(), MainActivity.class));
             }
         });
     }
+
+    // Add to database
+    public void runMutation(Context context, float item_cost, String item_category){
+        AWSAppSyncClient mAWSAppSyncClient = AWSAppSyncClient.builder()
+                .context(context.getApplicationContext())
+                .awsConfiguration(new AWSConfiguration(context.getApplicationContext()))
+                .build();
+
+        CreateMoneyInput createMoneyInput = CreateMoneyInput.builder().
+                cost(item_cost).
+                category(item_category).
+                build();
+
+        mAWSAppSyncClient.mutate(CreateMoneyMutation.builder().input(createMoneyInput).build())
+                .enqueue(mutationCallback);
+    }
+
+    private GraphQLCall.Callback<CreateMoneyMutation.Data> mutationCallback = new GraphQLCall.Callback<CreateMoneyMutation.Data>() {
+        @Override
+        public void onResponse(@Nonnull Response<CreateMoneyMutation.Data> response) {
+            Log.i("Results", "Added Money");
+        }
+
+        @Override
+        public void onFailure(@Nonnull ApolloException e) {
+            Log.e("Error", e.toString());
+        }
+    };
 }
