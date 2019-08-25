@@ -3,6 +3,7 @@ query GetMoney($id: ID!) {
   getMoney(id: $id) {
     id
     cost
+    category
   }
 }
 query ListMoneys(
@@ -14,6 +15,7 @@ query ListMoneys(
     items {
       id
       cost
+      category
     }
     nextToken
   }

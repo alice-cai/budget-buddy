@@ -3,17 +3,20 @@ subscription OnCreateMoney {
   onCreateMoney {
     id
     cost
+    category
   }
 }
 subscription OnUpdateMoney {
   onUpdateMoney {
     id
     cost
+    category
   }
 }
 subscription OnDeleteMoney {
   onDeleteMoney {
     id
     cost
+    category
   }
 }

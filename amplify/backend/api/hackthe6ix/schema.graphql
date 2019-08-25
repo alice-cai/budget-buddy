@@ -1,4 +1,5 @@
 type Money @model {
   id: ID!
-  cost: Int!
+  cost: Float!
+  category: String!
 }

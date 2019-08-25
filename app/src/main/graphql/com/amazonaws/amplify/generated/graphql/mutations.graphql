@@ -3,17 +3,20 @@ mutation CreateMoney($input: CreateMoneyInput!) {
   createMoney(input: $input) {
     id
     cost
+    category
   }
 }
 mutation UpdateMoney($input: UpdateMoneyInput!) {
   updateMoney(input: $input) {
     id
     cost
+    category
   }
 }
 mutation DeleteMoney($input: DeleteMoneyInput!) {
   deleteMoney(input: $input) {
     id
     cost
+    category
   }
 }
